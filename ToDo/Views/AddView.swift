@@ -9,7 +9,13 @@ import SwiftUI
 
 struct AddView: View {
     
+    @Environment(\.dismiss) var dismis
+    @EnvironmentObject var listViewModel: ListViewModel
+
     @State var textFieldText: String = ""
+    
+    @State var alertTitle: String = ""
+    @State var showAlert: Bool = false
     
     var body: some View {
         ScrollView {
@@ -19,18 +25,8 @@ struct AddView: View {
                     .frame(height: 55)
                     .background(.gray.opacity(0.3))
                 .cornerRadius(10)
-            
-//                Button(action: {}, label: {
-//                    Text("WTF")
-//                        .foregroundColor(.blue)
-//                        .font(.headline)
-//                        .frame(height: 55)
-//                        .frame(maxWidth: .infinity)
-//                        .backgroundStyle(Color.accentColor)
-//                        .cornerRadius(10)
-//                })
                 
-                Button(action: {}, label: {
+                Button(action: saveButtonPressed, label: {
                     Text("Save")
                         .foregroundColor(.white)
                         .font(.headline)
@@ -42,7 +38,25 @@ struct AddView: View {
             }
             .padding(14)
         }
-        .navigationTitle("Add an item")
+        .navigationTitle("Add an item🖊")
+        .alert("your new todo must be more than 3 characters long😱", isPresented: $showAlert) {
+                    Button("OK") { }
+                }
+    }
+    
+    func saveButtonPressed() {
+        if textIsAppropriate() {
+            listViewModel.addItem(title: textFieldText)
+            dismis()
+        }
+    }
+    
+    func textIsAppropriate() -> Bool {
+        if textFieldText.count < 3 {
+            showAlert.toggle()
+            return false
+        }
+        return true
     }
 }
 
@@ -51,5 +65,6 @@ struct AddView_Previews: PreviewProvider {
         NavigationView {
             AddView()
         }
+        .environmentObject(ListViewModel())
     }
 }
