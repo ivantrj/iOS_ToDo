@@ -25,6 +25,10 @@ struct ToDoApp: App {
                         .tabItem {
                             Label("Habits", systemImage: "calendar.circle")
                         }
+                    NotesView()
+                        .tabItem {
+                            Label("Notes", systemImage: "note.text")
+                        }
                 }
 
             }

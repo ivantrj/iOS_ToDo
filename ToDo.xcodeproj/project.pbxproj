@@ -16,6 +16,7 @@
 		2C65052C29E6F74300732483 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65052B29E6F74300732483 /* ItemModel.swift */; };
 		2C65052F29E809E500732483 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65052E29E809E500732483 /* ListViewModel.swift */; };
 		7D12C62B2A065EE700B9348E /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D12C62A2A065EE700B9348E /* HabitsView.swift */; };
+		7D12C62D2A065FE200B9348E /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D12C62C2A065FE200B9348E /* NotesView.swift */; };
 		7D6FC9C129E97612004E01AA /* NoItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6FC9C029E97612004E01AA /* NoItemsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		2C65052B29E6F74300732483 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		2C65052E29E809E500732483 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		7D12C62A2A065EE700B9348E /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
+		7D12C62C2A065FE200B9348E /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		7D6FC9C029E97612004E01AA /* NoItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				2C65052829E6F0EE00732483 /* AddView.swift */,
 				7D6FC9C029E97612004E01AA /* NoItemsView.swift */,
 				7D12C62A2A065EE700B9348E /* HabitsView.swift */,
+				7D12C62C2A065FE200B9348E /* NotesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				2C65052529E6D8C700732483 /* ListView.swift in Sources */,
 				7D6FC9C129E97612004E01AA /* NoItemsView.swift in Sources */,
 				2C65052729E6E66C00732483 /* ListRowView.swift in Sources */,
+				7D12C62D2A065FE200B9348E /* NotesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
