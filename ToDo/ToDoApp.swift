@@ -15,9 +15,19 @@ struct ToDoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ListView()
+                TabView {
+                    ListView()
+                        .tabItem {
+                            Label("To Do", systemImage: "checkmark")
+                        }
+                        .environmentObject(listViewModel)
+                    HabitsView()
+                        .tabItem {
+                            Label("Habits", systemImage: "calendar.circle")
+                        }
+                }
+
             }
-            .environmentObject(listViewModel)
         }
     }
 }
