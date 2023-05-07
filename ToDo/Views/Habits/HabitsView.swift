@@ -10,6 +10,7 @@ import SwiftUI
 struct HabitsView: View {
     @StateObject var habits = Habits()
     @State private var showingAddHabit = false
+    
     var body: some View {
         GeometryReader { geo in
             NavigationView{

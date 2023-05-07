@@ -14,9 +14,8 @@ struct ToDoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
                 TabView {
-                    ListView()
+                    ToDoListView()
                         .tabItem {
                             Label("To Do", systemImage: "checkmark")
                         }
@@ -30,8 +29,6 @@ struct ToDoApp: App {
                             Label("Notes", systemImage: "note.text")
                         }
                 }
-
-            }
         }
     }
 }

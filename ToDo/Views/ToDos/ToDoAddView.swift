@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddView: View {
+struct ToDoAddView: View {
     
     @Environment(\.dismiss) var dismis
     @EnvironmentObject var listViewModel: ToDoListViewModel
@@ -63,7 +63,7 @@ struct AddView: View {
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddView()
+            ToDoAddView()
         }
         .environmentObject(ToDoListViewModel())
     }

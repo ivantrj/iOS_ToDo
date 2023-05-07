@@ -7,8 +7,8 @@
 
 import Foundation
 
-class ListViewModel: ObservableObject {
-    @Published var items: [ItemModel] = [] {
+class ToDoListViewModel: ObservableObject {
+    @Published var items: [ToDoItemModel] = [] {
         didSet {
             saveItems()
         }
@@ -21,7 +21,7 @@ class ListViewModel: ObservableObject {
     
     func getItems() {
         guard
-            let data = UserDefaults.standard.data(forKey: itemsKey), let savedItems = try? JSONDecoder().decode([ItemModel].self, from: data)
+            let data = UserDefaults.standard.data(forKey: itemsKey), let savedItems = try? JSONDecoder().decode([ToDoItemModel].self, from: data)
         else { return }
         
         self.items = savedItems
@@ -36,11 +36,11 @@ class ListViewModel: ObservableObject {
     }
     
     func addItem(title: String) {
-        let newItem = ItemModel(title: title, isCompleted: false)
+        let newItem = ToDoItemModel(title: title, isCompleted: false)
         items.append(newItem)
     }
     
-    func updateItem(item: ItemModel) {
+    func updateItem(item: ToDoItemModel) {
         
 //        if let index = items.firstIndex { existingItem in
 //            return existingItem.id == item.id

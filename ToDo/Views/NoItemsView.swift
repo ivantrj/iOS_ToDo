@@ -20,7 +20,7 @@ struct NoItemsView: View {
                     .fontWeight(.semibold)
                 Text("Click the Add button to start adding new To Dos")
                     .padding(.bottom, 20)
-                NavigationLink(destination: AddView(),
+                NavigationLink(destination: ToDoAddView(),
                                label: {
                                     Text("Add something ➕")
                         .foregroundColor(.white)

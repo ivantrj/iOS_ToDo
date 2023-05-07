@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListRowView: View {
     
-    var item: ItemModel
+    var item: ToDoItemModel
 
     var body: some View {
         HStack {
@@ -26,8 +26,8 @@ struct ListRowView: View {
 
 struct ListRowView_Previews: PreviewProvider {
     
-    static var item1 = ItemModel(title: "first", isCompleted: false)
-    static var item2 = ItemModel(title: "second", isCompleted: true)
+    static var item1 = ToDoItemModel(title: "first", isCompleted: false)
+    static var item2 = ToDoItemModel(title: "second", isCompleted: true)
 
     
     static var previews: some View {

@@ -17,7 +17,7 @@ struct HabitsAddView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        Text("Hello")
+        Text("Habit Add View")
     }
     
     
