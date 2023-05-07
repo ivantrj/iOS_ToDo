@@ -10,7 +10,7 @@ import SwiftUI
 struct AddView: View {
     
     @Environment(\.dismiss) var dismis
-    @EnvironmentObject var listViewModel: ListViewModel
+    @EnvironmentObject var listViewModel: ToDoListViewModel
 
     @State var textFieldText: String = ""
     
@@ -65,6 +65,6 @@ struct AddView_Previews: PreviewProvider {
         NavigationView {
             AddView()
         }
-        .environmentObject(ListViewModel())
+        .environmentObject(ToDoListViewModel())
     }
 }
