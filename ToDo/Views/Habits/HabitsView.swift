@@ -8,64 +8,64 @@
 import SwiftUI
 
 struct HabitsView: View {
-    @StateObject var habits = Habits()
-    @State private var showingAddHabit = false
+    @StateObject var habitViewModel = HabitViewModel()
+    @State private var isShowingAddHabit = false
     
     var body: some View {
-        GeometryReader { geo in
-            NavigationView{
-                List{
-                    ForEach(habits.items) { habit in
-                        NavigationLink{
-                            HabitDetailView(habit: habit, habits: habits)
-                        }label:{
-                            HStack{
-                                VStack{
-                                    Text("\(habit.habitName)")
-                                        .font(.title2)
-                                    Text("\(habit.habitDate.formatted(date: .abbreviated, time: .omitted))")
-                                        .font(.caption)
-                                }
-                                .padding([.leading])
-                                Spacer()
-                                Text("\(habit.habitCompletionCount)")
-                                    .bold()
-                                    .padding([.trailing])
-                                
-                            }
-                            .foregroundColor(.white)
-                            .frame(width: geo.size.width - 50, height: 100, alignment: .center)
-                            .background(LinearGradient(gradient: Gradient(colors: [.green,.yellow]), startPoint: .top, endPoint: .bottom))
-                            .cornerRadius(25)
+        NavigationView {
+            List {
+                ForEach(habitViewModel.habits) { habit in
+                    NavigationLink {
+                        HabitDetailView(
+                            habitViewModel: habitViewModel,
+                            habit: habit
+                        )
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(habit.title)
+                                .foregroundColor(habit.color ?? .black)
+                            
+                            Spacer(minLength: 10)
+                            
+                            Text(
+                                habit.completionCount == 1 ?
+                                "1 completion to date." : "\(habit.completionCount) completions to date."
+                            )
+                                .font(.subheadline.italic())
+                            
                         }
+                        .padding(.vertical, 5)
                     }
-                    .onDelete(perform: removeItems)
-                    .listRowSeparator(.hidden)
                 }
-                .listStyle(PlainListStyle())
-                .navigationTitle("Habit Tracker")
-                .toolbar {
-                    Button{
-                        showingAddHabit = true
+                .onMove { indexSet, index in
+                    habitViewModel.habits.move(fromOffsets: indexSet, toOffset: index)
+                }
+                .onDelete { offsets in
+                    habitViewModel.habits.remove(atOffsets: offsets)
+                }
+            }
+            .navigationTitle("Habit Tracker")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    if habitViewModel.habits.count > 0 {
+                        EditButton()
+                    }
+                    
+                    Button {
+                        isShowingAddHabit = true
                     } label: {
                         Image(systemName: "plus")
-                            .foregroundColor(.green)
                     }
                 }
             }
-            .preferredColorScheme(.light)
-            .accentColor(.green)
-            .sheet(isPresented: $showingAddHabit) {
-                HabitsAddView(habits: habits)
+            .sheet(isPresented: $isShowingAddHabit) {
+                HabitAddView(habitViewModel: habitViewModel)
             }
         }
     }
-    func removeItems(at offsets: IndexSet){
-        habits.items.remove(atOffsets: offsets)
-    }
 }
 
-struct HabitsView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         HabitsView()
     }

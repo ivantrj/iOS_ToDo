@@ -7,36 +7,60 @@
 
 import SwiftUI
 
-struct HabitsAddView: View {
+struct HabitAddView: View {
+    @ObservedObject var habitViewModel: HabitViewModel
     
     @Environment(\.dismiss) var dismiss
-    @State private var habitName = ""
-    @State private var habitDescription = ""
-    @State private var habitDate:Date = Date.now
-    @ObservedObject var habits: Habits
-    @State private var showingAlert = false
+    
+    @State private var title = ""
+    @State private var description = ""
+    @State private var color: Color = .blue
     
     var body: some View {
-        Text("Habit Add View")
-    }
-    
-    
-    func saveHabit() {
-        if (habitName != "") {
-            let item = HabitItemModel(habitName: self.habitName, habitDescription: self.habitDescription, habitDate: self.habitDate, habitCompletionCount: 0)
-            self.habits.items.insert(item, at: 0)
-            self.dismiss()
-            return
-        } else {
-            showingAlert = true
-            return
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Habit title", text: $title)
+                    
+                    TextField("Habit description", text: $description)
+                }
+                
+                Section {
+                    CustomColorPicker(selectedColor: $color)
+                }
+            }
+            .navigationTitle("Add a new habit")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Save") {
+                        let newHabit = HabitItemModel(
+                            title: title,
+                            description: description,
+                            // I need to update the actual colorString to be encoded/decoded,
+                            // not the computed color property.
+                            colorString: Color.habitColors[color, default: nil]
+                        )
+                        habitViewModel.habits.append(newHabit)
+                        
+                        dismiss()
+                    }
+                    .disabled(title.isEmpty)
+                }
+            }
         }
     }
 }
 
-
-struct HabitsAddView_Previews: PreviewProvider {
+struct AddHabitView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitsAddView(habits: Habits())
+        HabitAddView(habitViewModel: HabitViewModel())
+            .preferredColorScheme(.dark)
     }
 }
